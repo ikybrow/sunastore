@@ -1,157 +1,124 @@
-<!DOCTYPE html>
-<html lang="id">
+<!DOCTYPE html><html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Web Interaktif Gelap</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Web Interaktif</title>
   <style>
-    * { box-sizing: border-box; }
-    body, html {
+    body {
       margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', sans-serif;
-      overflow-x: hidden;
-      background: #0f0f0f;
+      font-family: Arial, sans-serif;
+      background: black;
       color: white;
-    }
-
-    /* Splash Intro */
-    #splash {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: #000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 999;
-      animation: fadeOut 2s ease 4s forwards;
-    }
-
-    #splash h1 {
-      font-size: 2em;
-      animation: typing 2s steps(20, end), blink .75s step-end infinite;
-      white-space: nowrap;
       overflow: hidden;
-      border-right: 3px solid #00ffff;
     }
-
-    @keyframes fadeOut { to { opacity: 0; visibility: hidden; } }
-    @keyframes typing { from { width: 0 } to { width: 100% } }
-    @keyframes blink { 50% { border-color: transparent } }
-
-    header, section {
-      padding: 60px 20px 100px;
-      text-align: center;
-      display: none;
-      animation: fadeInUp 0.8s ease-out;
-    }
-
-    header.active, section.active { display: block; }
-
-    nav {
-      position: fixed;
-      bottom: 0; left: 0; right: 0;
-      background: rgba(0, 0, 0, 0.9);
+    .loading {
       display: flex;
-      justify-content: space-around;
-      padding: 15px 0;
-      z-index: 10;
-      border-top: 2px solid #00ffff;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: black;
+      animation: fadeOut 2s ease forwards;
+      animation-delay: 2s;
     }
-
-    nav button {
-      background: none;
-      border: none;
-      color: #fff;
-      font-size: 1.1em;
-      cursor: pointer;
-      transition: all 0.3s;
+    .loading span {
+      font-size: 2em;
+      animation: pulse 1s infinite;
     }
-
-    nav button:hover {
-      color: #00ffff;
-      transform: scale(1.2);
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
     }
-
-    ul { list-style: none; padding: 0; }
-    li {
-      background: rgba(255,255,255,0.08);
-      margin: 10px auto;
+    @keyframes fadeOut {
+      to { opacity: 0; visibility: hidden; }
+    }
+    .hidden { display: none; }
+    .container {
+      padding: 20px;
+      display: none;
+      animation: fadeIn 1s ease forwards;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .menu {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    .menu button {
       padding: 10px;
-      width: 90%;
-      border-radius: 10px;
+      background: #333;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
     }
-
-    a { color: #00ffff; text-decoration: none; }
-
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+    .menu button:hover {
+      background: #555;
+    }
+    .wa-contact {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: green;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 0 10px rgba(0,255,0,0.7);
+      transition: transform 0.3s;
+    }
+    .wa-contact:hover {
+      transform: scale(1.1);
     }
   </style>
 </head>
 <body>
+  <div class="loading" id="loading">
+    <span>Loading...</span>
+  </div>  <div class="container" id="registerForm">
+    <h2>Registrasi</h2>
+    <input type="text" id="username" placeholder="Masukkan nama Anda" style="padding:10px;width:100%;max-width:300px;" />
+    <br><br>
+    <button onclick="submitForm()">Daftar</button>
+  </div>  <div class="container" id="welcome" style="display:none;">
+    <h2 id="greeting"></h2>
+    <div class="menu">
+      <button onclick="alert('Jika ingin melihat pamflet,Hubungi contact owner')">Menu suntik sosmed</button>
+      <button onclick="alert('ᴘᴀᴋᴇᴛ ꜱᴇᴡᴀ  :
+   - 1 ᴍɪɴɢɢᴜ - ʀᴘ 5.000
+   - 3 ᴍɪɴɢɢᴜ - ʀᴘ 15.000
+   - 1 ʙᴜʟᴀɴ - ʀᴘ 20.000
+   - 2 ʙᴜʟᴀɴ - ʀᴘ 35.000
+   - 3 ʙᴜʟᴀɴ - ʀᴘ 50.000
 
-<!-- Musik -->
-<audio autoplay loop>
-  <source src="https://www.bensound.com/bensound-music/bensound-summer.mp3" type="audio/mpeg">
-</audio>
+✦ _ᴛɪᴅᴀᴋ ᴍᴇʟᴀʏᴀɴɪ ꜱᴇᴡᴀ ᴘᴇʀᴍᴀɴᴇɴᴛ_')">Menu sewa bot</button>
+      <button onclick="alert('Menu 3 diklik')">Menu 3</button>
+    </div>
+  </div><a class="wa-contact" href="https://wa.me/6282141903060?text=assalamu'alaikum+bang" target="_blank">Kontak Owner</a>
 
-<!-- Suara Klik -->
-<audio id="clickSound" src="https://www.soundjay.com/buttons/sounds/button-16.mp3" preload="auto"></audio>
+  <script>
+    // Setelah loading selesai, tampilkan form registrasi
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('registerForm').style.display = 'block';
+      }, 2500);
+    });
 
-<!-- Splash / Intro -->
-<div id="splash">
-  <h1>SELAMAT DATANG...</h1>
-</div>
-
-<!-- Halaman Sambutan -->
-<header id="sambutan" class="active">
-  <h1>Selamat Datang di Rikzstore !</h1>
-  <p>Silakan gunakan menu di bawah untuk menjelajah.</p>
-</header>
-
-<!-- Isi Menu -->
-<section id="menu">
-  <h2>Daftar Menu</h2>
-  <ul>
-    <li>Suntik Sosmed</li>
-    <li>Penyewaan Bot wa</li>
-    <p> Jika berminat, Silahkan menghubungi nomor owner
-  </ul>
-</section>
-
-<!-- Kontak Owner -->
-<section id="kontak">
-  <h2>Kontak Owner</h2>
-  <p>Hubungi kami via WhatsApp:
-    <a href="https://wa.me/6282141903060?text=bang+mau+sewa+Bot/suntik+sosmed+wa">Contact Owner</a>
-  </p>
-</section>
-
-<!-- Navigasi -->
-<nav>
-  <button onclick="navigasi('sambutan')">Sambutan</button>
-  <button onclick="navigasi('menu')">Menu</button>
-  <button onclick="navigasi('kontak')">Kontak</button>
-</nav>
-
-<script>
-  function navigasi(id) {
-    document.querySelectorAll('header, section').forEach(el => el.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
-    document.getElementById('clickSound').play();
-  }
-
-  // Sembunyikan splash setelah 4 detik
-  window.onload = function () {
-    setTimeout(() => {
-      document.getElementById('splash').style.display = 'none';
-      document.getElementById('sambutan').classList.add('active');
-    }, 4000);
-  };
-</script>
-
-</body>
+    function submitForm() {
+      const name = document.getElementById('username').value;
+      if (name.trim() === '') {
+        alert('Nama tidak boleh kosong!');
+        return;
+      }
+      document.getElementById('registerForm').style.display = 'none';
+      document.getElementById('welcome').style.display = 'block';
+      document.getElementById('greeting').innerText = `Selamat datang, ${name}!`;
+    }
+  </script></body>
 </html>
